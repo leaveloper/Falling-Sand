@@ -61,10 +61,10 @@ const forces = {
   gravity: 1,
 }
 
-function createShape(mouseEvent) {
+function createShape(x, y) {
   const shape = new MovingCollider({
-    x: mouseEvent.x - size / 2, // Centrar horizontalmente
-    y: mouseEvent.y - size / 2, // Centrar verticalmente
+    x: x - size / 2, // Centrar horizontalmente
+    y: y - size / 2, // Centrar verticalmente
     width: size,
     height: size,
     mass: 1,
@@ -157,12 +157,11 @@ window.onmousemove = (e) => {
   if (e.buttons !== 1)
     return;
   
-  createShape(e)
+  createShape(e.x, e.y)
 }
 
-window.ontouchmove = (e) => {
-  if (e.buttons !== 1)
-    return;
-  
-  createShape(e)
+window.ontouchmove = (e) => {  
+  e.preventDefault();
+  const touch = e.touches[0];
+  createShape(touch.clientX, touch.clientY)
 }
