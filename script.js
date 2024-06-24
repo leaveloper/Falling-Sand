@@ -159,3 +159,10 @@ window.onmousemove = (e) => {
   
   createShape(e)
 }
+
+window.ontouchmove = (e) => {
+  if (e.buttons !== 1)
+    return;
+  
+  createShape(e)
+}
